@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_train_session3/src/features/sign_up/sign_up_screen.dart';
 
 import '../../components/constants/image_constants.dart';
 import '../../components/widgets/mybutton_social.dart';
 
-class OnboardingScreen extends StatelessWidget {
+class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  void _onTapGetStart() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => const SignUpScreen(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,21 +68,27 @@ class OnboardingScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30)
                   .copyWith(bottom: 20),
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF101010),
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    'Get Started'.toUpperCase(),
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
+              child: GestureDetector(
+                onTap: _onTapGetStart,
+                onDoubleTap: () {
+                  print('onDoubleTap');
+                },
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF101010),
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      'Get Started'.toUpperCase(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                 ),
