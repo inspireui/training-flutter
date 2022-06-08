@@ -71,6 +71,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: GestureDetector(
                 onTap: _onTapGetStart,
                 onDoubleTap: () {
+                  // ignore: avoid_print
                   print('onDoubleTap');
                 },
                 child: Container(

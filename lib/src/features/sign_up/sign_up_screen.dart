@@ -11,6 +11,8 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  int page = 0;
+  final _controller = PageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +23,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
           Center(
             child: CupertinoButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                // Navigator.of(context).pop();
+                if (page > 3) {
+                  page = 0;
+                } else {
+                  page++;
+                }
+                _controller.jumpToPage(page);
               },
               color: Colors.amber,
               child: const Text('CLick here'),
@@ -29,6 +37,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           const WishlistWiidget(),
           const WishlistWiidget(isChecked: true),
+          SizedBox(
+            height: 400,
+            child: PageView(
+              controller: _controller,
+              children: [
+                Container(
+                  color: Colors.amber,
+                  child: const Text('text 1'),
+                ),
+                Container(
+                  color: Colors.blue,
+                  child: const Text('text 2'),
+                ),
+                Container(
+                  color: Colors.amber,
+                  child: const Text('text 3'),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
