@@ -2,9 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../components/services/user_service.dart';
 import '../../components/widgets/wishlist_widget.dart';
 import '../profile/profile_screen.dart';
+import '../profile/profile_viewmodel.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -40,7 +43,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute<void>(
-                    builder: (BuildContext context) => const ProfileScreen(),
+                    builder: (BuildContext context) => ChangeNotifierProvider(
+                      create: (_) => ProfileViewModel(UserService()),
+                      builder: (_, __) => const ProfileScreen(),
+                    ),
                   ),
                 );
               },
