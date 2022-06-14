@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_train_session3/src/features/sign_up/sign_up_screen.dart';
 
-import '../../components/constants/image_constants.dart';
+import '../sign_up/sign_up_screen.dart';
 import '../../components/widgets/mybutton_social.dart';
+import '../../constants.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({
@@ -65,7 +65,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
             ),
-            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30)
                   .copyWith(bottom: 20),
