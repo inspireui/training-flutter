@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_train_session3/src/features/factory.dart';
 
 import '../sign_up/sign_up_screen.dart';
 import '../../components/widgets/mybutton_social.dart';
@@ -17,8 +18,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   void _onTapGetStart() {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
-        builder: (BuildContext context) => const SignUpScreen(),
-      ),
+          builder: (BuildContext context) =>
+              FeatureFactory.create<SignUpScreen>()),
     );
   }
 
