@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_train_session3/src/features/sign_up/sign_up_screen.dart';
+import 'package:flutter_train_session3/src/features/factory.dart';
 
-import '../../components/constants/image_constants.dart';
+import '../sign_up/sign_up_screen.dart';
 import '../../components/widgets/mybutton_social.dart';
+import '../../constants.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({
@@ -17,8 +18,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   void _onTapGetStart() {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
-        builder: (BuildContext context) => const SignUpScreen(),
-      ),
+          builder: (BuildContext context) =>
+              FeatureFactory.create<SignUpScreen>()),
     );
   }
 
@@ -65,7 +66,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
             ),
-            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30)
                   .copyWith(bottom: 20),

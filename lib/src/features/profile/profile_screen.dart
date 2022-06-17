@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
-const apiEndpoint = 'https://randomuser.me/api/';
+import '../../constants.dart';
+import 'profile_viewmodel.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -13,24 +14,10 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  var userName = '';
-
-  Future<String> _getDataUser(String url) async {
-    final uri = Uri.parse(url);
-
-    final response = await http.get(uri);
-    await Future.delayed(const Duration(seconds: 3));
-    return response.body;
-  }
-
   @override
   void initState() {
-    _getDataUser(apiEndpoint).then((value) {
-      setState(() {
-        userName = value;
-      });
-    });
-
+    context.read<ProfileViewModel>().loadDataUser(apiEndpoint);
+    
     super.initState();
   }
 
@@ -40,18 +27,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         title: const Text('Profile'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: [
-            const Text('name:'),
-            if (userName.isNotEmpty) ...[
-              Text(jsonDecode(userName)['results'][0]['gender'] ?? 'null'),
-              Text(
-                  jsonDecode(userName)['results'][0]['name']['last'] ?? 'null'),
-            ] else
-              const  CircularProgressIndicator()
-          ],
+      body: Consumer<ProfileViewModel>(
+        builder: (context, viewmodel, child) => Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              const Text('name:'),
+              if (viewmodel.userName.isNotEmpty) ...[
+                Text(jsonDecode(viewmodel.userName)['results'][0]['gender'] ??
+                    'null'),
+                Text(jsonDecode(viewmodel.userName)['results'][0]['name']
+                        ['last'] ??
+                    'null'),
+              ] else
+                const CircularProgressIndicator()
+            ],
+          ),
         ),
       ),
     );

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/widgets/wishlist_widget.dart';
+import '../factory.dart';
 import '../profile/profile_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -40,8 +41,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute<void>(
-                    builder: (BuildContext context) => const ProfileScreen(),
-                  ),
+                      builder: (BuildContext context) =>
+                          FeatureFactory.create<ProfileScreen>()),
                 );
               },
               style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
